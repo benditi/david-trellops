@@ -1,0 +1,12 @@
+.attachment-main-container{
+    button{
+        height: 20px;
+        border: none;
+        cursor: pointer;
+        color: #5e6c84;
+        text-decoration: underline;
+        &:hover{
+            color: #172b4d;
+        }
+    }
+}

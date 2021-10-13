@@ -1,0 +1,37 @@
+.activity-list{ 
+    .activities-header{
+        font-weight: 600;
+        font-size: 14px;
+        color: #172b4d;
+        line-height: 20px;
+        margin-left: 25px;
+        .activities-header-txt{
+            margin-left: 21px;
+        }
+    } 
+    img{
+        height: 30px;
+        width: 30px;
+        border-radius: 50%;
+    }
+    .nav-txt-container{
+        flex-wrap: wrap;
+        font-size: 14px;
+        color: rgba#172b4d;
+        line-height: 20px;
+        margin-left: 14px;
+        .activity-member{
+            font-weight: 700;
+            margin-right: 4px;
+        }
+        .txt-underline{
+            text-decoration: underline;
+        }
+    }
+    .date{
+        font-size: 12px;
+        justify-content: flex-start;
+        margin-inline-start: 44px;
+        margin-top: 5px;
+    }
+}

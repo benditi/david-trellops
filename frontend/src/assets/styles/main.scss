@@ -1,0 +1,42 @@
+// Setup
+@import 'setup/variables';
+@import 'setup/functions';
+@import 'setup/mixins';
+@import 'setup/typography';
+
+// Basics
+@import 'basics/helpers';
+@import 'basics/base';
+
+
+// Components
+@import 'cmps/home-header';
+@import 'cmps/boards-nav-bar';
+@import 'cmps/group';
+@import 'cmps/task';
+@import 'cmps/file-attachment';
+@import 'cmps/modal';
+@import 'cmps/checklist';
+@import 'cmps/_color-pick';
+@import 'cmps/date-pick';
+@import 'cmps/board-header';
+@import 'cmps/member-pick';
+@import 'cmps/label-pick';
+@import 'cmps/modal-details-labels';
+@import 'cmps/task-members';
+@import 'cmps/task-checklist';
+@import 'cmps/modal-details-date';
+@import 'cmps/task-attachment';
+@import 'cmps/modal-details-comments';
+@import 'cmps/work-space-popup';
+@import 'cmps/progress-bar';
+@import 'cmps/activity-list';
+// @import "cmps/app-header";
+// @import "cmps/app-footer";
+// @import "cmps/user-msg";
+
+// Pages
+@import 'pages/home-page';
+@import 'pages/workspace';
+@import 'pages/board-app';
+@import 'pages/task-details';

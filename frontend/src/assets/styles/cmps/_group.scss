@@ -1,0 +1,121 @@
+.group-container {
+  width: 300px;
+  margin: 4px;
+  box-sizing: border-box;
+  display: inline-block;
+  vertical-align: top;
+  white-space: nowrap;
+
+  .container {
+    background-color: rgb(235, 236, 240);
+    border-radius: $borderRad1;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    // max-height: 100%;
+    position: relative;
+    white-space: normal;
+
+    .remove-div {
+      height: 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .remove-group {
+        cursor: pointer;
+        border: none;
+        background-color: transparent;
+
+        img {
+          height: 18px;
+          cursor: pointer;
+        }
+      }
+
+      &:hover {
+        .remove-group {
+          visibility: visible;
+          transition-delay: 0.1s;
+        }
+      }
+    }
+
+    .card-list {
+      height: 100%;
+      padding: rem(5px) rem(5px);
+      flex: 1;
+      border-radius: $borderRad1;
+      font-size: 14px;
+      transition: all 1s;
+      font-size: rem(16px);
+      font-weight: 400;
+      margin-inline-start: 3px;
+      margin: 0 4px;
+      padding: 0 4px;
+    }
+
+    .card-list-cards {
+      flex: 1 1 auto;
+      overflow-y: auto;
+      overflow-x: hidden;
+
+      .tasks {
+        overflow-y: auto;
+        position: relative;
+        max-height: 70vh;
+
+        &::-webkit-scrollbar {
+          width: 8px;
+        }
+
+        &::-webkit-scrollbar-track {
+          border-radius: $borderRad2;
+          margin-bottom: 2px;
+          background-color: #dadbe2;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          border-radius: $borderRad2;
+          background-color: #bfc4ce;
+        }
+      }
+
+      .card-btn-container {
+        padding: 5px;
+        color: #5e6c84;
+
+        img {
+          height: rem(14px);
+          margin: auto;
+        }
+
+        .card-btn {
+          border: none;
+          padding: 4px, 1px;
+          color: #5e6c84;
+        }
+      }
+    }
+  }
+
+  .group-container {
+    display: flex;
+    flex-direction: column;
+    padding: 0 8px;
+    overflow-y: auto;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 300px;
+    min-height: 30px;
+    margin-bottom: 6px;
+    // padding: 6px;
+    position: relative;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 14px;
+  }
+}

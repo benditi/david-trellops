@@ -1,0 +1,62 @@
+.close-modal-btn {
+  position: absolute;
+  top: 11px;
+  right: 0;
+  background-color: transparent;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  color: #42526e;
+  font-size: 1.55rem;
+  margin: 4px;
+  padding: 4px;
+  .svg-close{
+    font-size: 1.4rem;
+  }
+}
+.close-modal-btn:hover{
+  background-color: #f0ecec;
+}
+.modal-header {
+  height: 14px;
+  margin-bottom: 36px;
+  .modal-title {
+    height: 100%;
+    img {
+      height: 100%;
+    }
+    h3 {
+      margin-left: 12px;
+      font-size: rem(20px);
+      font-family: SourceSans-Regular;
+    }
+    button {
+    }
+  }
+  p {
+    font-family: SourceSans-Light;
+    margin-left: 31px;
+    span {
+      text-decoration: underline;
+    }
+  }
+}
+
+.modal-title {
+}
+.modal-main-container {
+  align-items: center;
+  .modal-details {
+    width: 66%;
+    .description-title {
+      h3 {
+        margin-left: 15px;
+        font-family: SourceSans-Regular;
+      }
+    }
+    .description-txt {
+      margin-left: 30px;
+      font-family: SourceSans-Light;
+    }
+  }
+}
