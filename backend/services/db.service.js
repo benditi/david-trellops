@@ -5,7 +5,7 @@ const BoardSchema = require('./schemas/board');
 
 mongoose
   .connect(
-    'mongodb+srv://mango:mango@koticluster.mtgal.mongodb.net/trellops?retryWrites=true&w=majority',
+    'mongodb://localhost:27017/trellops',
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
