@@ -17,7 +17,6 @@ export function Workspace() {
   }, []);
 
   const { boards } = useSelector((state) => state.boardModule);
-  const [boardsState, setBoardsState] = useState(boards);
   const [boardName, setBoardName] = useState('');
   const [isPopShown, setIsPopShown] = useState(false);
   const [boardBackground, setBoardBackground] = useState('#0079bf');
@@ -44,18 +43,15 @@ export function Workspace() {
         <h2>Workspace</h2>
         <div className='work-space-boards'>
           {boards.map((board, idx) => (
-            <Link to={`/board/${board._id}`} key={idx}>
-              <div
+            <Link to={`/board/${board._id}`} key={idx}
                 className='board-preview'
                 style={{
-                  backgroundColor: board.style?.bgColor,
-                  backgroundImage: `url(${board.style?.bgColor})`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                }}
-              >
+                backgroundColor: board.style?.bgColor,
+                backgroundImage: `url(${board.style?.bgColor})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                }}>
                 <div>{board.title}</div>
-              </div>
             </Link>
           ))}
           <div

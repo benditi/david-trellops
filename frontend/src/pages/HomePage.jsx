@@ -1,14 +1,11 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-
 import heroImgUrl from '../assets/imgs/home-page-hero.png';
 import productImgUrl from '../assets/imgs/trello-pict.png';
 
 import { HomeHeader } from '../cmps/HomeHeader';
 
 export function HomePage() {
-  const { board } = useSelector((state) => state.boardModule);
   return (
     <div className="home">
       <HomeHeader />

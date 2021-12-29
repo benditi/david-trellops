@@ -26,7 +26,7 @@ export function loadBoard(boardId, setIsLoaded) {
 export function onSaveBoard(board) {
   return async (dispatch) => {
     try {
-      const newBoard = await boardService.updateBoardPrm(board);
+      await boardService.updateBoardPrm(board);
       dispatch({ type: 'SAVE_BOARD', board });
     } catch (err) {
       console.log('BoardActions: err in onSaveBoard', err);
@@ -50,7 +50,7 @@ export function onSetBoardTitle(boardId, title) {
 export function onAddBoard(body) {
   return async (dispatch) => {
     try {
-      const addedBoard = await boardService.addBoardPrm(body);
+      await boardService.addBoardPrm(body);
       const boards = await boardService.getBoardsPrm();
       dispatch({ type: 'SET_BOARDS', boards });
     } catch (err) {
@@ -61,7 +61,7 @@ export function onAddBoard(body) {
 export function onDeleteBoard(id) {
   return async (dispatch) => {
     try {
-      const deletedBoard = await boardService.deleteBoardPrm(id);
+      await boardService.deleteBoardPrm(id);
       const boards = await boardService.getBoardsPrm();
       dispatch({ type: 'SET_BOARDS', boards });
     } catch (err) {

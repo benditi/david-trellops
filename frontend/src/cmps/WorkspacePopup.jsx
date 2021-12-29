@@ -35,11 +35,6 @@ export function WorkspacePopup({
     setexampleBackground(background);
     setBoardBackground(background);
   };
-  const inputProps = {
-    fontWeight: 500,
-    disableUnderline: true,
-    color: 'white',
-  };
 
   return (
     <div className='work-space-popup'>

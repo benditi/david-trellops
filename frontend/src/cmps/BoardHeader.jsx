@@ -19,6 +19,7 @@ export function BoardHeader({ board, setBgColor, setBoardTitle }) {
   return (
     <div className='board-header flex'>
       <TextField
+        className='header-title'
         variant='standard'
         value={board.title}
         onChange={(ev) => setBoardTitle(ev.target.value)}

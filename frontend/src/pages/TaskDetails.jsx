@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import io from 'socket.io-client';
 import { ReactComponent as PaperClipIcon } from '../assets/imgs/icons/paperclip-solid.svg';
 import { ReactComponent as MemberIcon } from '../assets/imgs/icons/person.svg';
 import { boardService } from '../services/board-service';
@@ -19,10 +18,6 @@ import CheckboxIcon from '@material-ui/icons/CheckBoxOutlined';
 import CoverIcon from '@material-ui/icons/VideoLabel';
 import MinusIcon from '@material-ui/icons/RemoveOutlined';
 import CopyIcon from '@material-ui/icons/FileCopyOutlined';
-import {
-  ThemeProvider,
-  createTheme,
-} from '@material-ui/core/styles';
 import { DetailsMembers } from '../cmps/TaskDetails/DetailsMembers';
 import { DetailsLables } from '../cmps/TaskDetails/DetailsLables';
 import { onSaveBoard } from '../store/actions/boards-actions';
@@ -55,7 +50,6 @@ export function TaskDetails({ props, board }) {
   const [commentVal, setCommentVal] = useState('');
   const [descVal, setDescVal] = useState(task.description);
   const [currPopover, setCurrPopover] = useState('');
-  const [currProps, setCurrProps] = useState('');
   const [currPopoverPos, setCurrPopoverPos] = useState('');
   const [size, setSize] = useState([0, 0]);
   const togglePopover = (ev, name) => {
@@ -373,6 +367,7 @@ export function TaskDetails({ props, board }) {
               <div className='comment-add flex'>
                 <img
                   src={Ron}
+                  alt=''
                   style={{
                     width: '32px',
                     height: '32px',

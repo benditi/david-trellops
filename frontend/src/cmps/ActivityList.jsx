@@ -141,7 +141,6 @@ export function ActivityList({ board }) {
                       activity.byMember.fullname
                     )}
                   </span>
-                  {/* <span className='taskOrGroup'>{activity.taskOrGroup?.title}</span> */}
                 </div>
               </div>
               <div className='date flex'>

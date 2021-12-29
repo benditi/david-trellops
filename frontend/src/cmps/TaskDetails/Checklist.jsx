@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { TextField } from '@material-ui/core';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import { utilService } from '../../services/util-service';
-import { boardService } from '../../services/board-service';
 
 export function Checklist({ bodyObj }) {
   const { props, setCurrPopover, sendTask, popoverPos } = bodyObj;

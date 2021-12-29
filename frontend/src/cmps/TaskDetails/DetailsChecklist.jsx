@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import Checkbox from 'rc-checkbox';
 import { ProgressBar } from './ProgressBar';
-import { boardService } from '../../services/board-service';
 
 export function DetailsChecklist({ task, sendTask, togglePopover }) {
   const [listStateVal, createListVal] = React.useState(

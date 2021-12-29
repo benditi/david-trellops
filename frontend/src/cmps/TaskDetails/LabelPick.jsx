@@ -7,9 +7,7 @@ import BookmarkIcon from '@mui/icons-material/Bookmark';
 
 export function LabelPick({ bodyObj }) {
   const { props, setCurrPopover, sendTask, popoverPos } = bodyObj;
-  const getLabels = () => { };
   const { board } = useSelector((state) => state.boardModule);
-  const [stateVal, createStateVal] = React.useState({});
   const [labelStateVal, createLabelVal] = React.useState(
     board.labels.map((boardLabel) => {
       if (props.labels.some((label) => label.id === boardLabel.id)) {

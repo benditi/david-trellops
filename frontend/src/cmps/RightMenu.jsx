@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { onDeleteBoard } from '../store/actions/boards-actions.js';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -14,7 +14,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faTimes,
   faChevronLeft,
-  faSquare,
 } from '@fortawesome/free-solid-svg-icons';
 import night from '../assets/imgs/backgrounds/night.png';
 import house from '../assets/imgs/backgrounds/house.png';
@@ -227,7 +226,7 @@ export function RightMenu({ setBgColor, board }) {
   );
 
   return (
-    <div className='rigth-menu'>
+    <div className='right-menu'>
       {['right'].map((anchor) => (
         <React.Fragment key={anchor}>
           <Drawer
@@ -242,8 +241,6 @@ export function RightMenu({ setBgColor, board }) {
               fontSize: '1.2rem',
               fontFamily:
                 "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
-              fontWeight: '700',
-              fontSize: '16px',
             }}
           >
             Show menu

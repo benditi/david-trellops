@@ -8,7 +8,7 @@ export function DetailsComments({ task }) {
                 return (
                     <li key={idx} className="flex">
                         <img
-                            src={require(`../../assets/imgs/profiles/${comment.byMember.imgUrl}`).default} />
+                            src={require(`../../assets/imgs/profiles/${comment.byMember.imgUrl}`).default} alt=""/>
                         <div className="comments-main-content flex column justify-center">
                             <div className="comments-member-name">
                                 {comment.byMember.fullname}

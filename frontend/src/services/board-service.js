@@ -139,39 +139,6 @@ function query(entityType = 'boardsDB', boardId) {
   });
 }
 
-function get(entityType = 'boardsDB', entityId) {
-  return query(entityType).then((entities) =>
-    entities.find((entity) => entity._id === entityId)
-  );
-}
-
-function post(entityType = 'boardsDB', newEntity) {
-  newEntity._id = utilService.makeId();
-  newEntity.createdAt = Date.now();
-  return query(entityType).then((entities) => {
-    entities.push(newEntity);
-    _save(entityType, entities);
-    return newEntity;
-  });
-}
-
-function put(entityType = 'boardsDB', updatedEntity) {
-  return query(entityType).then((entities) => {
-    _save(entityType, updatedEntity);
-    return updatedEntity;
-  });
-}
-
-function remove(entityType = 'boardsDB', entityId) {
-  return query(entityType).then((entities) => {
-    const idx = entities.findIndex(
-      (entity) => entity._id === entityId
-    );
-    entities.splice(idx, 1);
-    _save(entityType, entities);
-  });
-}
-
 function _save(entityType, entities) {
   localStorage.setItem(entityType, JSON.stringify(entities));
 }

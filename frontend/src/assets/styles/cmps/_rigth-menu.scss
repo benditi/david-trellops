@@ -1,0 +1,7 @@
+.right-menu{
+    button{
+        @media(min-width: $mobile-breakpoint){
+            font-weight: 700;
+        }
+    }
+}

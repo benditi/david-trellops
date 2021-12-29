@@ -1,6 +1,4 @@
-import React, { Component } from 'react';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
-
 export function ColorPick({ bodyObj }) {
   const { props, setCurrPopover, sendTask, popoverPos } = bodyObj;
   const setColor = (color) => {

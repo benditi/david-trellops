@@ -1,6 +1,4 @@
 import React from "react";
-import Styled from 'styled-components'
-
 
 export function ProgressBar({ task }) {
     const GetProgPercent = () => {
@@ -17,7 +15,6 @@ export function ProgressBar({ task }) {
         <div className='progress-bar flex align-center'>
             <div className='prog-percent'>{progressPercent}%</div>
             <progress value={progressPercent} max={100}
-            // style={(progressPercent===100)? {backgroundColor:'green'}: {}}
             />
         </div>
     )

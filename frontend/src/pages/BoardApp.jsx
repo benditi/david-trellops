@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useDebounce } from 'use-debounce';
 import Loader from 'react-loader-spinner';
 import { useDispatch, useSelector } from 'react-redux';
-import io from 'socket.io-client';
 import {
   DragDropContext,
   Droppable,
@@ -22,7 +21,7 @@ import {
   constructTask,
   boardService,
 } from '../services/board-service.js';
-
+import ZoomInIcon from '@mui/icons-material/ZoomIn';
 import Group from '../cmps/Group';
 import { BoardsNavBar } from '../cmps/BoardsNavBar.jsx';
 import { BoardHeader } from '../cmps/BoardHeader.jsx';
@@ -32,6 +31,7 @@ export function BoardApp(props) {
   const [isLoaded, setIsLoaded] = useState(false);
   const { board } = useSelector((state) => state.boardModule);
   const [boardState, setBoardState] = useState(board);
+  const [isZoom, setIsZoom] = useState(false)
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(loadBoard(props.match.params.boardId, setIsLoaded));
@@ -54,6 +54,9 @@ export function BoardApp(props) {
     });
     return () => socket.close();
   }, []);
+
+  // The debounce helps making fewer calls to the server allowing multiple changes in board.
+  //When boardstate changes if there are no changes after 1.5 seconds the second useEffect which calls the action (and the server) will run.
   const [value] = useDebounce(boardState, 1500);
   const [modalState, setModalState] = useState(false);
   useEffect(() => {
@@ -77,6 +80,7 @@ export function BoardApp(props) {
     }
   }, [board]);
 
+  //useEffect that fires board action
   useEffect(() => {
     if (boardState._id === props.match.params.boardId) {
       const boardStateCpy = { ...boardState };
@@ -90,7 +94,6 @@ export function BoardApp(props) {
     }
   }, [value]);
 
-  const { boards } = useSelector((state) => state.boardModule);
   const [groupName, setGroupName] = useState('');
 
   const onAddEmptyGroup = () => {
@@ -277,33 +280,33 @@ export function BoardApp(props) {
 
   var groups = boardState.groups
     ? boardState.groups.map((group, idx) => {
-        return (
-          <Draggable
-            key={group.id}
-            draggableId={group.id}
-            index={idx}
-          >
-            {(provided) => (
-              <div
-                {...provided.draggableProps}
-                {...provided.dragHandleProps}
-                ref={provided.innerRef}
-              >
-                <Group
-                  boardId={boardState._id}
-                  onRemoveGroup={onRemoveGroup}
-                  group={group}
-                  setGroupTitle={setGroupTitle}
-                  key={group.id}
-                  onAddTask={onAddTask}
-                  onRemoveTask={onRemoveTask}
-                  onSetTask={onSetTask}
-                />
-              </div>
-            )}
-          </Draggable>
-        );
-      })
+      return (
+        <Draggable
+          key={group.id}
+          draggableId={group.id}
+          index={idx}
+        >
+          {(provided) => (
+            <div
+              {...provided.draggableProps}
+              {...provided.dragHandleProps}
+              ref={provided.innerRef}
+            >
+              <Group
+                boardId={boardState._id}
+                onRemoveGroup={onRemoveGroup}
+                group={group}
+                setGroupTitle={setGroupTitle}
+                key={group.id}
+                onAddTask={onAddTask}
+                onRemoveTask={onRemoveTask}
+                onSetTask={onSetTask}
+              />
+            </div>
+          )}
+        </Draggable>
+      );
+    })
     : '';
 
   const setBgColor = (colorVal) => {
@@ -312,6 +315,10 @@ export function BoardApp(props) {
       onSaveBoard({ ...board, style: { bgColor: colorVal } })
     );
   };
+
+  const onZoomOut = () => {
+    setIsZoom(!isZoom)
+  }
   return boardState._id ? (
     <div
       className='board-app flex column'
@@ -330,7 +337,7 @@ export function BoardApp(props) {
         {modalState && (
           <TaskDetails props={props} board={boardState} />
         )}
-        <div className='group-list'>
+        <div className={isZoom ? 'group-list zoom' : 'group-list'}>
           <Droppable
             droppableId='groups'
             direction='horizontal'
@@ -355,6 +362,7 @@ export function BoardApp(props) {
             )}
           </Droppable>
         </div>
+          <button className='zoom-btn' onClick={onZoomOut}><ZoomInIcon className='zoom-icon'/></button>
       </DragDropContext>
     </div>
   ) : (

@@ -58,9 +58,9 @@ export default function Group({
     });
 
   const [taskVal, setTaskVal] = useState('');
-  const composeTask = (ev) => {
-    setTaskVal(ev.target.value);
-  };
+  // const composeTask = (ev) => {
+  //   setTaskVal(ev.target.value);
+  // };
   const handleOnDragEnd = (result) => {
     const items = Array.from(tasks);
     const [reorderedTask] = items.splice(result.source.index, 1);
