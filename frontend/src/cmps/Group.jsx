@@ -20,7 +20,7 @@ export default function Group({
   const [tasks, setTasks] = useState(group.tasks);
   useEffect(() => {
     setTasks(currGroup ? currGroup.tasks : group.tasks);
-  }, [board]);
+  }, [board, currGroup,  group.tasks]);
 
   const dragStyle = (style, snapshot) =>
     !snapshot.isDropAnimating
@@ -30,7 +30,7 @@ export default function Group({
   var list =
     tasks &&
     tasks.map((task, idx) => {
-      if (!task) return;
+      if (!task) return null;
       return (
         <Draggable key={task.id} draggableId={task.id} index={idx}>
           {(provided, snapshot) => (
@@ -57,16 +57,6 @@ export default function Group({
       );
     });
 
-  const [taskVal, setTaskVal] = useState('');
-  // const composeTask = (ev) => {
-  //   setTaskVal(ev.target.value);
-  // };
-  const handleOnDragEnd = (result) => {
-    const items = Array.from(tasks);
-    const [reorderedTask] = items.splice(result.source.index, 1);
-    items.splice(result.destination.index, 0, reorderedTask);
-    setTasks(items);
-  };
 
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -148,7 +138,7 @@ export default function Group({
                     <AddIcon fontSize='small' />
                     <button
                       className='card-btn'
-                      onClick={() => onAddTask(group.id, taskVal)}
+                      onClick={() => onAddTask(group.id, '')}
                     >
                       {' '}
                       Add a Card

@@ -168,6 +168,7 @@ export function TaskDetails({ props, board }) {
       : currGrp.tasks.splice(taskIdx, 1, sentTask ? sentTask : task);
     board.groups.splice(grpIdx, 1, currGrp);
     socket.emit('move-applicant', board.groups);
+    console.log('taskdetails board:', board);
     dispatch(onSaveBoard(board));
     if (isRemove) {
       closeModal();

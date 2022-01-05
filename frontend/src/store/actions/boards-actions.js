@@ -11,12 +11,11 @@ export function loadBoards() {
   };
 }
 
-export function loadBoard(boardId, setIsLoaded) {
+export function loadBoard(boardId) {
   return async (dispatch) => {
     try {
       const board = await boardService.getBoardPrm(boardId);
       dispatch({ type: 'SET_BOARD', board });
-      setIsLoaded(true);
     } catch (err) {
       console.log(err);
     }

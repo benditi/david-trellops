@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import Checkbox from 'rc-checkbox';
 import { ProgressBar } from './ProgressBar';
@@ -8,15 +8,22 @@ export function DetailsChecklist({ task, sendTask, togglePopover }) {
     task.checklists ? task.checklists : ''
   );
   const [removedChecklist, setRemovedChecklist] = React.useState(null)
+  const hasSentTask = useRef(false)
+
   useEffect(() => {
-    sendTask(false, { ...task, checklists: listStateVal }, removedChecklist);
-  }, [listStateVal]);
+    if (!hasSentTask.current) {
+      sendTask(false, { ...task, checklists: listStateVal }, removedChecklist);
+    }
+    hasSentTask.current = true;
+  }, [listStateVal, removedChecklist, sendTask, task]);
   const onChange = (e, idx) => {
+    hasSentTask.current = false;
     const copyList = [...task.checklists];
     copyList[idx].checked = e.target.checked;
     createListVal(copyList);
   };
   const removeCheck = (idx) => {
+    hasSentTask.current = false;
     setRemovedChecklist(task.checklists[idx].title)
     const listCopy = [...task.checklists];
     listCopy.splice(idx, 1);
@@ -48,7 +55,6 @@ export function DetailsChecklist({ task, sendTask, togglePopover }) {
               marginInlineStart: '10px',
             }}
             onClick={() => removeCheck(idx)}
-            // onClick={togglePopover("CHECKLISTSBTN")}
             className='checklist-dots-btn clean-btn'
           >
             <CloseRoundedIcon style={{ fontSize: '18px', color: '#42526e' }} />

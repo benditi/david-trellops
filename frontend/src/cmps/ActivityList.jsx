@@ -103,6 +103,8 @@ export function ActivityList({ board }) {
             {destination}
           </div>
         );
+      default:
+        return 
     }
   };
   const activityList = (
@@ -120,7 +122,7 @@ export function ActivityList({ board }) {
           <span className='activities-header-txt'>Activity</span>
         </div>
         {lastActivities.map((activity, index) => (
-          <ListItem button key={index} onClick={(ev) => {}}>
+          <ListItem button key={index} onClick={(ev) => { }}>
             <div className='flex column'>
               <div className='flex align-center'>
                 {activity.byMember.imgUrl !== 'http://some-img' && (

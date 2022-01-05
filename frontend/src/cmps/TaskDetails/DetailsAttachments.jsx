@@ -1,18 +1,23 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 
 export function DetailsAttachments({ task, sendTask }) {
   const [attachmentStateVal, createAttachmentVal] = React.useState(
     task.attachments ? task.attachments : ''
   );
+  const hasSentTask = useRef(false)
   useEffect(() => {
-    sendTask(false, {
-      ...task,
-      attachments: attachmentStateVal,
-    });
-  }, [attachmentStateVal]);
+    if (!hasSentTask.current) {
+      sendTask(false, {
+        ...task,
+        attachments: attachmentStateVal,
+      });
+      hasSentTask.current = true
+    }
+  }, [attachmentStateVal, sendTask, task]);
 
   const deleteAttachment = (idx) => {
+    hasSentTask.current = false
     const attachmentCopy = [...task.attachments];
     attachmentCopy.splice(idx, 1);
     createAttachmentVal(attachmentCopy);

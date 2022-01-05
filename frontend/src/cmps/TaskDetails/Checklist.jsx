@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { TextField } from '@material-ui/core';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import { utilService } from '../../services/util-service';
@@ -9,17 +9,24 @@ export function Checklist({ bodyObj }) {
   const [listStateVal, createListVal] = React.useState(
     props.checklists ? props.checklists : []
   );
+
+  const hasSentTask = useRef(false)
   useEffect(() => {
-    let checklistTitle =
-      listStateVal[listStateVal.length - 1]?.title;
-    sendTask(
-      false,
-      { ...props, checklists: listStateVal },
-      checklistTitle
-    );
-  }, [listStateVal]);
+    if (!hasSentTask.current) {
+      let checklistTitle =
+        listStateVal[listStateVal.length - 1]?.title;
+      sendTask(
+        false,
+        { ...props, checklists: listStateVal },
+        checklistTitle
+      );
+      hasSentTask.current = true
+    }
+  }, [listStateVal, sendTask, props]);
+
   const pressKey = (ev) => {
     if (ev.keyCode === 13) {
+      hasSentTask.current = false
       createListVal([...listStateVal, stateVal]);
       createStateVal({});
     }
@@ -65,6 +72,7 @@ export function Checklist({ bodyObj }) {
         <button
           className='blue-btn checklist-add'
           onClick={() => {
+            hasSentTask.current = false
             createListVal([...listStateVal, stateVal]);
             createStateVal({});
           }}

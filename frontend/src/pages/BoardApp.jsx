@@ -28,13 +28,12 @@ import { BoardHeader } from '../cmps/BoardHeader.jsx';
 import { TaskDetails } from './TaskDetails';
 import socket from '../services/socket-service';
 export function BoardApp(props) {
-  const [isLoaded, setIsLoaded] = useState(false);
   const { board } = useSelector((state) => state.boardModule);
   const [boardState, setBoardState] = useState(board);
   const [isZoom, setIsZoom] = useState(false)
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(loadBoard(props.match.params.boardId, setIsLoaded));
+    dispatch(loadBoard(props.match.params.boardId));
     dispatch(loadBoards());
     socket.on('move-applicant', (payload) => {
       setBoardState((prevState) => {

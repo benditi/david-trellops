@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
 import {
   DatePicker,
@@ -10,9 +10,18 @@ import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 export function DatePick({ bodyObj }) {
   const { props, setCurrPopover, sendTask, popoverPos } = bodyObj;
   const [startDate, setStartDate] = useState(Date.now());
+  const hasSentTask = useRef(false)
   useEffect(() => {
-    sendTask(false, { ...props, dueDate: startDate });
-  }, [startDate]);
+    if (!hasSentTask.current) {
+      sendTask(false, { ...props, dueDate: startDate });
+    }
+    hasSentTask.current = true
+  }, [startDate, props, sendTask]);
+  const onSetDate = (date) => {
+    hasSentTask.current = false
+    const stampDate = Date.parse(date)
+    setStartDate(stampDate)
+  }
   return (
     <div
       className='date-pick'
@@ -38,7 +47,7 @@ export function DatePick({ bodyObj }) {
           variant='static'
           openTo='date'
           value={startDate}
-          onChange={(date) => setStartDate(date)}
+          onChange={(date) => onSetDate(date)}
         />
       </MuiPickersUtilsProvider>
     </div>

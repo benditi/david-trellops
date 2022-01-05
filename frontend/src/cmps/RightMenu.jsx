@@ -238,7 +238,7 @@ export function RightMenu({ setBgColor, board }) {
             onClick={toggleDrawer(anchor, true)}
             style={{
               textTransform: 'none',
-              fontSize: '1.2rem',
+              // fontSize: '1.2rem',
               fontFamily:
                 "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
             }}
