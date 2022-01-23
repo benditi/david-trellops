@@ -52,7 +52,7 @@ export function BoardApp(props) {
       });
     });
     return () => socket.close();
-  }, []);
+  }, [dispatch, props.match.params.boardId]);
 
   // The debounce helps making fewer calls to the server allowing multiple changes in board.
   //When boardstate changes if there are no changes after 1.5 seconds the second useEffect which calls the action (and the server) will run.
@@ -64,7 +64,9 @@ export function BoardApp(props) {
     } else {
       setModalState(false);
     }
-  });
+  }, [props.match.params.taskId]);
+
+  //This effect checks for error (after setBoardState is called)
   useEffect(() => {
     if (JSON.stringify(boardState) === JSON.stringify(board)) return;
     const boardCpy = { ...board };
@@ -79,7 +81,7 @@ export function BoardApp(props) {
     }
   }, [board]);
 
-  //useEffect that fires board action
+  //useEffect that fires board action: can't put boardstate in dependencies beacuse it is affected by the dispatch
   useEffect(() => {
     if (boardState._id === props.match.params.boardId) {
       const boardStateCpy = { ...boardState };
@@ -91,15 +93,13 @@ export function BoardApp(props) {
         onSaveBoard(filterdTasks ? boardStateCpy : boardState)
       );
     }
-  }, [value]);
-
-  const [groupName, setGroupName] = useState('');
+  }, [value, dispatch, props.match.params.boardId]);
 
   const onAddEmptyGroup = () => {
     const newActivity = boardService.createActivity('new group');
     const newGroupArrCopy = [
       ...boardState.groups,
-      getEmptyGroup(groupName),
+      getEmptyGroup(''),
     ];
     socket.emit('move-applicant', newGroupArrCopy);
     setBoardState((prevState) => {
@@ -253,7 +253,7 @@ export function BoardApp(props) {
   };
 
   const handleOnDragEnd = (result) => {
-    const { destination, source, type } = result;
+    const { destination, source } = result;
     const groupsCpy = [...boardState.groups];
     if (!destination) return;
     if (result.type === 'group') {

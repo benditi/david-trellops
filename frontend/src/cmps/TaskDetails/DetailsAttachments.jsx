@@ -29,7 +29,7 @@ export function DetailsAttachments({ task, sendTask }) {
           <img src={val} alt="" style={{ height: '120px', objectFit: 'contain', margin: '2px' }} />
           <div style={{ width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-betwween', padding: '6px 10px' }} >
             <div>
-              <h5>{val}</h5>
+              <h5 style={{wordBreak: 'break-all'}}>{val}</h5>
               <button onClick={() => deleteAttachment(idx)}>Delete</button>
             </div>
           </div>

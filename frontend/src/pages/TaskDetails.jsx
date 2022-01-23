@@ -42,10 +42,8 @@ export function TaskDetails({ props, board }) {
       : board.groups
           .find((group) => group.id === groupId)
           .tasks.find((task) => task.id === taskId);
-  const [group, setGroup] = useState(
-    board.groups.find((group) => group.id === groupId)
-  );
-  const [boardId, setBoardId] = useState(props.match.params.boardId);
+  const group = board.groups.find((group) => group.id === groupId);
+  const boardId = props.match.params.boardId
   const [task, setTask] = useState(getTask(taskId, groupId));
   const [commentVal, setCommentVal] = useState('');
   const [descVal, setDescVal] = useState(task.description);
@@ -57,12 +55,7 @@ export function TaskDetails({ props, board }) {
     setCurrPopover(name);
   };
   const dispatch = useDispatch();
-  useEffect(() => {
-    sendTask(false);
-  }, [task.comments]);
-  useEffect(() => {
-    sendTask(false, { ...task, description: descVal });
-  }, [descVal]);
+  
   useEffect(() => {
     if (!reduxBoard?.groups) return;
     const dbTask = getTask(taskId, groupId);
@@ -168,7 +161,6 @@ export function TaskDetails({ props, board }) {
       : currGrp.tasks.splice(taskIdx, 1, sentTask ? sentTask : task);
     board.groups.splice(grpIdx, 1, currGrp);
     socket.emit('move-applicant', board.groups);
-    console.log('taskdetails board:', board);
     dispatch(onSaveBoard(board));
     if (isRemove) {
       closeModal();
@@ -177,6 +169,14 @@ export function TaskDetails({ props, board }) {
       setTask(sentTask);
     }
   };
+
+  useEffect(() => {
+    sendTask(false);
+  }, [task.comments]);
+
+  useEffect(() => {
+    sendTask(false, { ...task, description: descVal });
+  }, [descVal]);
 
   const setCopyTask = () => {
     const grpIdx = board.groups.findIndex(
@@ -244,13 +244,6 @@ export function TaskDetails({ props, board }) {
     return size;
   }
   useWindowSize();
-  //variable for mui styling-not working
-  // const theme = createTheme({
-  //   typography: {
-  //     fontFamily:
-  //       '"Segoe UI"',
-  //   },
-  // });
 
   return (
     <section className='card-details-container'>

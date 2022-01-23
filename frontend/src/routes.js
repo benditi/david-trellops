@@ -2,6 +2,7 @@ import { HomePage } from './pages/HomePage';
 import { Workspace } from './pages/Workspace';
 import { LoginSignup } from './pages/LoginSignup';
 import { BoardApp } from './pages/BoardApp';
+import { Dashboard } from './pages/Dashboard';
 
 export const routes = [
   {
@@ -19,6 +20,10 @@ export const routes = [
   {
     path: '/workspace',
     component: Workspace,
+  },
+  {
+    path: 'dashboard/:boardId',
+    component: Dashboard,
   },
   {
     path: '/',

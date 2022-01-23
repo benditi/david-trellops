@@ -14,7 +14,7 @@ export function Workspace() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(loadBoards());
-  }, []);
+  }, [dispatch]);
 
   const { boards } = useSelector((state) => state.boardModule);
   const [boardName, setBoardName] = useState('');
