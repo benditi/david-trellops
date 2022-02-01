@@ -22,7 +22,7 @@ export const routes = [
     component: Workspace,
   },
   {
-    path: 'dashboard/:boardId',
+    path: '/dashboard/:boardId',
     component: Dashboard,
   },
   {

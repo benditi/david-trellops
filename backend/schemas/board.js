@@ -17,6 +17,12 @@ const BoardSchema = new mongoose.Schema({
           title: String,
           description: String,
           dueDate: Number,
+          isDone: {
+            type: Boolean,
+            required: function () {
+              return this.dueDate ? true : false
+            }
+          },
           bgColor: String,
           comments: [
             {

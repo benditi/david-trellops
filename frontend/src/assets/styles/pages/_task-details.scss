@@ -1,5 +1,5 @@
 .card-details-container {
-    overflow-y: auto;
+    overflow-y: scroll;
     top: 0;
     padding: 48px;
     height: 100%;
@@ -7,6 +7,9 @@
     z-index: 4;
     position: fixed;
     background-color: rgba(0, 0, 0, 0.5);
+    @media screen and (min-width: 560px){
+        overflow-y: auto;
+    }
     
 
     &::after {
@@ -25,11 +28,13 @@
         top: 0;
         right: 0;
         left: 0;
+        overflow-y: scroll;
         @media screen and (min-width: 560px){
             max-width: 770px;
             height: unset;
             top: 48px;
             margin: 0 8px;
+            overflow-y: unset;
         }
 
         .close-window-btn {
@@ -151,7 +156,6 @@
                     font-size: 12px;
                     font-weight: 500;
                     margin: 0 8px 4px 0;
-                    text-transform: uppercase;
                 }
 
                 .item-container {

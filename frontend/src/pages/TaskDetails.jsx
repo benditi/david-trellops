@@ -220,8 +220,10 @@ export function TaskDetails({ props, board }) {
     let newLeft = 0;
     let newBottom = 0;
     if (size[0] < 786) {
-      newLeft = targetPos.left - 200;
-      newBottom = targetPos.bottom - 312;
+      // newLeft = targetPos.left - 200;
+      // newBottom = targetPos.bottom - 312;
+      newLeft = 44;
+      newBottom = 40;
     } else if (size[0] < 1280) {
       newLeft = targetPos.left - 190;
       newBottom = targetPos.bottom + 6;

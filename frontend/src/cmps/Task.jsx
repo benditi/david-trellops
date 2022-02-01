@@ -27,7 +27,6 @@ export function Task({
     return progressData;
   }
   const progressData = GetProgPercent()
-
   return (
     <div
       className='task-preview'
@@ -64,20 +63,21 @@ export function Task({
         </div>
         <div className='task-btns'>
           <div className='sign-task flex align-center'>
-            {task.description ? <span><SubjectIcon fontSize="small"/></span> : ''}
+            {task.description ? <span><SubjectIcon fontSize="small" /></span> : ''}
             {task.checklists && task.checklists.length ? (
-                <span style={(progressData.percent === 100) ? { backgroundColor: '#61bd4f' } : {}}>
-                  <CheckBoxOutlinedIcon fontSize="small" />
-                </span>
-                // {/* <span className='prog-percent-span'>{progressData.string}</span> */}
-              ) : ''}
-              {task.comments.length ?  <span><ChatBubbleOutlineIcon fontSize="small" /></span> : ''}
-            {task.dueDate ? <span><TimerIcon fontSize="small" /></span> : ''}
-              {task.attachments && task.attachments.length ? (
-                <span><AttachFileIcon fontSize="small" /></span>
-              ) : (
-                ''
-              )}
+              <span style={(progressData.percent === 100) ? { backgroundColor: '#61bd4f' } : {}}>
+                <CheckBoxOutlinedIcon fontSize="small" style={(progressData.percent === 100) ? { color: 'white' } : {}} />
+              </span>
+            ) : ''}
+            {task.comments.length ? <span><ChatBubbleOutlineIcon fontSize="small" /></span> : ''}
+            {task.dueDate ?
+              <span style={task.isDone ? { backgroundColor: '#61bd4f' } : {}}>
+                <TimerIcon fontSize="small" style={(progressData.percent === 100) ? { color: 'white' } : {}} /></span> : ''}
+            {task.attachments && task.attachments.length ? (
+              <span><AttachFileIcon fontSize="small" /></span>
+            ) : (
+              ''
+            )}
           </div>
           <div className='avatar'>
             {task.members?.map((member, idx) => {

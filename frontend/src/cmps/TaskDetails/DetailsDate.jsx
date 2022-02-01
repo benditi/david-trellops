@@ -1,5 +1,6 @@
 import React from 'react'
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
+import { dateService } from '../../services/date-service';
 
 
 export function DetailsDate({ sendTask, task }) {
@@ -24,9 +25,10 @@ export function DetailsDate({ sendTask, task }) {
         </button>
         <div className="date-item"
         >
-          {new Date(task.dueDate).toLocaleDateString(
+          {/* {new Date(task.dueDate).toLocaleDateString(
             'en-GB'
-          )}
+          )} */}
+          {dateService.getFormattedDate(new Date(task.dueDate))}
         </div>
       </div>
     </div>

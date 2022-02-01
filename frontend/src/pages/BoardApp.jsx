@@ -22,6 +22,7 @@ import {
   boardService,
 } from '../services/board-service.js';
 import ZoomInIcon from '@mui/icons-material/ZoomIn';
+import ZoomOutIcon from '@mui/icons-material/ZoomOut';
 import Group from '../cmps/Group';
 import { BoardsNavBar } from '../cmps/BoardsNavBar.jsx';
 import { BoardHeader } from '../cmps/BoardHeader.jsx';
@@ -361,7 +362,7 @@ export function BoardApp(props) {
             )}
           </Droppable>
         </div>
-          <button className='zoom-btn' onClick={onZoomOut}><ZoomInIcon className='zoom-icon'/></button>
+          <button className='zoom-btn' onClick={onZoomOut}>{isZoom? <ZoomInIcon className='zoom-icon'/>: <ZoomOutIcon className='zoom-icon'/>}</button>
       </DragDropContext>
     </div>
   ) : (

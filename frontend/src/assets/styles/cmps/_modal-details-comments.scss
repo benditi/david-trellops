@@ -13,11 +13,14 @@
         }
         .comment-txt{
             margin-left: 7px;
-            width: 414px;
+            width: 292px;
             height: 36px;
             background-color: rgb(255, 255, 255);
             border-radius: 3px;
             border: 0.5px rgba(180, 180, 180, 0.479) solid;
+            @media screen and (min-width: 560px){
+                width: 414px;
+            }
             span{
                 margin-left: 14px;
                 font-size: rem(13px);

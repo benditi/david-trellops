@@ -1,6 +1,5 @@
 export const utilService = {
   makeId,
-  makeLorem,
   getRandomIntInclusive,
   delay,
 };
@@ -16,24 +15,6 @@ function makeId(length = 6) {
     );
   }
 
-  return txt;
-}
-
-function makeLorem(size = 1) {
-  var words = [
-    'ToDo',
-    'Doing',
-    'Finish',
-    'BackLog',
-    'CSS',
-    'CR',
-    'QA',
-  ];
-  var txt = '';
-  while (size > 0) {
-    size--;
-    txt += words[Math.floor(Math.random() * words.length)] + ' ';
-  }
   return txt;
 }
 

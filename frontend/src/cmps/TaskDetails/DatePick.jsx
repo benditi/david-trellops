@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import 'react-datepicker/dist/react-datepicker.css';
 import {
   DatePicker,
   MuiPickersUtilsProvider,
@@ -25,7 +24,8 @@ export function DatePick({ bodyObj }) {
   return (
     <div
       className='date-pick'
-      style={{ left: popoverPos.leftPos, top: popoverPos.topPos }}
+      style={(popoverPos.leftPos===44)?{ left: '25px', top: '40px' }:
+      { left: popoverPos.leftPos, top: popoverPos.topPos }}
     >
       <div className='nav-option-header flex align-center'>
         <button className='clean-btn hide'>
