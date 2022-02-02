@@ -8,7 +8,7 @@ import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 
 export function DatePick({ bodyObj }) {
   const { props, setCurrPopover, sendTask, popoverPos } = bodyObj;
-  const [startDate, setStartDate] = useState(Date.now());
+  const [startDate, setStartDate] = useState(props.dueDate || Date.now());
   const hasSentTask = useRef(false)
   useEffect(() => {
     if (!hasSentTask.current) {
@@ -21,11 +21,17 @@ export function DatePick({ bodyObj }) {
     const stampDate = Date.parse(date)
     setStartDate(stampDate)
   }
+
+  const removeDate = () => {
+    sendTask(false, { ...props, dueDate: '' })
+    hasSentTask.current = true
+    setCurrPopover(null)
+  }
   return (
     <div
       className='date-pick'
-      style={(popoverPos.leftPos===44)?{ left: '25px', top: '40px' }:
-      { left: popoverPos.leftPos, top: popoverPos.topPos }}
+      style={(popoverPos.leftPos === 44) ? { left: '25px', top: '40px' } :
+        { left: popoverPos.leftPos, top: popoverPos.topPos }}
     >
       <div className='nav-option-header flex align-center'>
         <button className='clean-btn hide'>
@@ -49,6 +55,7 @@ export function DatePick({ bodyObj }) {
           value={startDate}
           onChange={(date) => onSetDate(date)}
         />
+        <button className='remove-btn' onClick={() => removeDate()}>Remove</button>
       </MuiPickersUtilsProvider>
     </div>
   );

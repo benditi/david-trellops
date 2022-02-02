@@ -72,7 +72,7 @@ export function Task({
             {task.comments.length ? <span><ChatBubbleOutlineIcon fontSize="small" /></span> : ''}
             {task.dueDate ?
               <span style={task.isDone ? { backgroundColor: '#61bd4f' } : {}}>
-                <TimerIcon fontSize="small" style={(progressData.percent === 100) ? { color: 'white' } : {}} /></span> : ''}
+                <TimerIcon fontSize="small" style={task.isDone ? { color: 'white' } : {}} /></span> : ''}
             {task.attachments && task.attachments.length ? (
               <span><AttachFileIcon fontSize="small" /></span>
             ) : (

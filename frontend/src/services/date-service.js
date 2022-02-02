@@ -1,48 +1,32 @@
 export const dateService = {
     getFormattedDate,
-    formatDate
+    getDueStatus
 }
 
 function getFormattedDate(someDate) {
     let today = new Date()
     let now = Date.now()
-    const todaysStartStamp = now - (360 * 1000 * today.getMinutes()) - (60 * 1000 * today.getSeconds()) - (360 * 60 * 1000 * today.getHours())
-    const todaysEndStamp = now + (360 * 1000 * today.getMinutes()) + (60 * 1000 * today.getSeconds()) + (360 * 60 * 1000 * today.getHours())
-    const yesterdayStartStamp = todaysStartStamp - (24 * 60 * 60 * 1000)
-    const tomorrowStartStamp = todaysStartStamp + (24 * 60 * 60 * 1000)
     //check in case tomorrow/yesterday was in a different month
-    if (+someDate >= yesterdayStartStamp && +someDate <= todaysStartStamp) return 'yesterday'
-    if (+someDate >= todaysEndStamp && +someDate <= tomorrowStartStamp) return 'tomorrow'
-    if (someDate.getFullYear() === today.getFullYear() && someDate.getMonth() === today.getMonth()) {
-        if (someDate.getDate() === today.getDate()) return 'today'
-        else if (someDate.getDate() === today.getDate() + 1) return 'tomorrow'
-        else if (someDate.getDate() === today.getDate() - 1) return 'yesterday'
-        else return monthNames[someDate.getMonth()] + ' ' + someDate.getDate() + ', ' + someDate.getFullYear()
-    } else return monthNames[someDate.getMonth()] + ' ' + someDate.getDate() + ', ' + someDate.getFullYear()
+    const todaysStartStamp = now - (60 * 1000 * today.getMinutes()) - ( 1000 * today.getSeconds()) - (360 * 1000 * today.getHours())
+    const todaysEndStamp = todaysStartStamp + 86400000 //number of milliseconds in one day
+    const yesterdayStartStamp = todaysStartStamp - (24 * 60 * 60 * 1000)
+    const tomorrowEndStamp = todaysEndStamp + (24 * 60 * 60 * 1000)
+    if (+someDate >= yesterdayStartStamp && +someDate < todaysStartStamp) return 'yesterday'
+    else if (+someDate > todaysEndStamp && +someDate <= tomorrowEndStamp) return 'tomorrow'
+    else if (+someDate >= todaysStartStamp && +someDate <= todaysEndStamp) return 'today'
+    else return monthNames[someDate.getMonth()] + ' ' + someDate.getDate() + ', ' + someDate.getFullYear()
 }
 
 const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
 ];
 
-function formatDate(someDateTimeStamp) {
-    var dt = new Date(someDateTimeStamp),
-        date = dt.getDate(),
-        month = monthNames[dt.getMonth()],
-        timeDiff = someDateTimeStamp - Date.now(),
-        diffDays = new Date().getDate() - date,
-        diffMonths = new Date().getMonth() - dt.getMonth(),
-        diffYears = new Date().getFullYear() - dt.getFullYear();
-
-    if (diffYears === 0 && diffDays === 0 && diffMonths === 0) {
-        return "Today";
-    } else if (diffYears === 0 && diffDays === 1) {
-        return "Yesterday";
-    } else if (diffYears === 0 && diffDays === -1) {
-        return "Tomorrow";
-    } else if (diffYears >= 1) {
-        return month + " " + date + ", " + new Date(someDateTimeStamp).getFullYear();
-    } else {
-        return month + " " + date;
-    }
+function getDueStatus(task){
+    if (task.isDone) return {color:'green', phrase:'complete'} //complete
+    const todayTimestamp = Date.now()
+    if (+task.dueDate - todayTimestamp> 86400000) return {color:'unset', phrase:''} //not soon -more than 24 hours
+    if (+task.dueDate - todayTimestamp < 86400000 && +task.dueDate - todayTimestamp>0) return {color:'yellow', phrase:'due soon'} //soon-within the next 24 hours
+    if (+task.dueDate - todayTimestamp >= -86400000 ) return {color:'red', phrase:'overdue'} // was yesterday- overdue- less than 24 hours
+    if (+task.dueDate - todayTimestamp < -86400000 ) return {color:'lightpink', phrase:'overdue'} //late-overdue more than 24 hours 
 }
+
